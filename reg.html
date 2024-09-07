@@ -115,12 +115,12 @@
     </div>
 
     <script>
-        const url = "https://script.google.com/macros/s/AKfycbwWU_1vvf6r-ffOD5RNfm-S9S7405IL4Y1KI-w-LLVbBd7LHYaJqbZfq8PoMGIbBfHm/exec";
+        const url = "XXXXXXX";
         const form = document.getElementById("myForm");
         let userId = ''; 
 
         // LIFF Initialization
-        liff.init({ liffId: "2005631248-qVBPe479" })
+        liff.init({ liffId: "XXXXXX" })
             .then(() => {
                 if (!liff.isLoggedIn()) {
                     liff.login();
@@ -184,15 +184,3 @@
 </body>
 
 </html>
-
-
-
-
-
-CODE.GS
-function doPost(e) {
-    var data = JSON.parse(e.postData.contents);
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("data");
-    sheet.getRange(sheet.getLastRow() + 1, 1, 1, 4).setValues([[data.userId, data.nameId, "'" + data.numberId, data.roleId]]);
-    return ContentService.createTextOutput("Data saved successfully.");
-}
