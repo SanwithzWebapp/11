@@ -215,3 +215,18 @@
 </body>
 
 </html>
+
+
+
+CODE.GS
+var DRIVE_FOLDER_ID = 'XXXXXXXX';
+
+function doPost(e) {
+    var data = JSON.parse(e.postData.contents);
+    var blob = Utilities.newBlob(Utilities.base64Decode(data.base64), data.type, data.name);
+    var fileLink = "https://lh5.googleusercontent.com/d/" + DriveApp.getFolderById(DRIVE_FOLDER_ID).createFile(blob).getId();
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("data");
+    sheet.getRange(sheet.getLastRow() + 1, 1, 1, 5).setValues([[data.userId, data.nameId, "'" + data.numberId, data.roleId, fileLink]]);
+    sheet.getRange(sheet.getLastRow(), 6).setFormula('=IMAGE("' + fileLink + '")');
+    return ContentService.createTextOutput("Data saved successfully. Image Link: " + fileLink);
+}
